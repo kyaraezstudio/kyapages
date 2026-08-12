@@ -695,14 +695,24 @@ button {
 
 .business {
   background: var(--green-soft);
+  display: block;
+}
 
-  display: grid;
+.business-intro {
+  max-width: 850px;
+  margin-bottom: 55px;
+}
 
-  grid-template-columns: 0.8fr 1.2fr;
+.business-cards {
+  display: grid !important;
+  grid-template-columns: repeat(3, 1fr) !important;
+  gap: 22px;
+  width: 100%;
+}
 
-  gap: 7vw;
-
-  align-items: center;
+.service-card {
+  min-height: 300px;
+}
 }
 
 .business-intro > p:not(.eyebrow) {
