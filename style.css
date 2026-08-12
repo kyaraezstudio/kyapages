@@ -1272,3 +1272,109 @@ footer {
   object-fit: cover;
   object-position: center top;
 }
+/* ===== KYARAEZ PRODUCT ===== */
+
+.product-card {
+  width: 100%;
+  max-width: 430px;
+  background: #ffffff;
+  border-radius: 26px;
+  overflow: hidden;
+  border: 1px solid rgba(80, 101, 83, 0.15);
+  box-shadow: 0 18px 50px rgba(63, 49, 40, 0.10);
+  transition: all 0.35s ease;
+}
+
+.product-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 25px 60px rgba(63, 49, 40, 0.16);
+}
+
+.product-image {
+  width: 100%;
+  height: 280px;
+  overflow: hidden;
+}
+
+.product-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.product-content {
+  padding: 25px;
+}
+
+.product-tag {
+  display: block;
+  margin-bottom: 10px;
+  color: #506553;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+}
+
+.product-content h3 {
+  margin: 0 0 10px;
+  font-family: "Playfair Display", serif;
+  font-size: 27px;
+  font-weight: 500;
+  color: #3f3128;
+}
+
+.product-content p {
+  margin: 0 0 22px;
+  color: #75685d;
+  font-size: 12px;
+  line-height: 1.7;
+}
+
+.product-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 15px;
+  padding-top: 18px;
+  border-top: 1px solid #dedbd2;
+}
+
+.product-price small {
+  display: block;
+  color: #968b82;
+  font-size: 9px;
+}
+
+.product-price strong {
+  display: block;
+  color: #3f3128;
+  font-size: 18px;
+}
+
+.product-buy {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 20px;
+  border-radius: 999px;
+  background: #506553;
+  color: #ffffff;
+  font-size: 11px;
+  font-weight: 700;
+  transition: 0.25s ease;
+}
+
+.product-buy:hover {
+  background: #3f3128;
+  transform: translateY(-2px);
+}
+
+@media (max-width: 620px) {
+  .business-cards {
+    display: block;
+  }
+
+  .product-card {
+    max-width: 100%;
+  }
+}
