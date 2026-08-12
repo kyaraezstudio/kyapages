@@ -721,11 +721,10 @@ button {
 
 .business-cards {
   display: grid;
-
-  grid-template-columns: repeat(3, 1fr);
-
-  gap: 15px;
+  grid-template-columns: minmax(280px, 430px);
+  gap: 20px;
 }
+
 
 .service-card {
   min-height: 240px;
