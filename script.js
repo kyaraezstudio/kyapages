@@ -468,134 +468,94 @@ document
 
   });
 /* =========================================
-   KYARAEZ ✦ SPARKLE CURSOR
+   KYARAEZ ✦ FINAL CURSOR
 ========================================= */
 
 if (window.matchMedia("(min-width: 901px)").matches) {
 
-  // Hide default cursor
-  document.body.classList.add("ky-sparkle-cursor");
+  document.body.style.cursor = "none";
 
-  // Main sparkle cursor
+  /* ✦ Cursor */
   const cursor = document.createElement("div");
-  cursor.className = "ky-cursor";
+
   cursor.innerHTML = "✦";
 
+  cursor.style.cssText = `
+    position: fixed;
+    pointer-events: none;
+    z-index: 2147483647;
+    font-size: 23px;
+    line-height: 1;
+    color: #8b7355;
+    transform: translate(-50%, -50%);
+    display: block;
+  `;
+
   document.body.appendChild(cursor);
+
 
   let mouseX = window.innerWidth / 2;
   let mouseY = window.innerHeight / 2;
 
-  let cursorX = mouseX;
-  let cursorY = mouseY;
 
-  /* =====================================
-     MOUSE MOVEMENT
-  ===================================== */
+  /* Mouse */
+  document.addEventListener("mousemove", (e) => {
 
-  document.addEventListener("mousemove", (event) => {
+    mouseX = e.clientX;
+    mouseY = e.clientY;
 
-  mouseX = event.clientX;
-  mouseY = event.clientY;
+    cursor.style.left = mouseX + "px";
+    cursor.style.top = mouseY + "px";
 
-});
-
-
-setInterval(() => {
-
-  createSparkle(mouseX, mouseY);
-
-}, 350);
-
-
-  /* =====================================
-     SMOOTH CURSOR
-  ===================================== */
-
-  function animateCursor() {
-
-    cursorX += (mouseX - cursorX) * 0.20;
-    cursorY += (mouseY - cursorY) * 0.20;
-
-    cursor.style.left = `${cursorX}px`;
-    cursor.style.top = `${cursorY}px`;
-
-    requestAnimationFrame(animateCursor);
-
-  }
-
-  animateCursor();
-
-
-  /* =====================================
-     HOVER EFFECT
-  ===================================== */
-
-  const clickableElements =
-    document.querySelectorAll(
-      "a, button, .service-card"
-    );
-
-  clickableElements.forEach((element) => {
-
-    element.addEventListener("mouseenter", () => {
-
-      cursor.classList.add("hover");
-
-    });
-
-    element.addEventListener("mouseleave", () => {
-
-      cursor.classList.remove("hover");
-
-    });
+    createSparkle(mouseX, mouseY);
 
   });
 
 
-  /* =====================================
-     ✦ SPARKLE TRAIL
-  ===================================== */
+  /* Sparkle otomatis saat diam */
+  setInterval(() => {
 
+    createSparkle(mouseX, mouseY);
+
+  }, 400);
+
+
+  /* ✦ Sparkle */
   function createSparkle(x, y) {
 
     const sparkle = document.createElement("span");
 
-    sparkle.className = "ky-sparkle";
-
-    const symbols = [
-      "✦",
-      "✧",
-      "⋆",
-      "·"
-    ];
-
     sparkle.textContent =
-      symbols[
-        Math.floor(
-          Math.random() * symbols.length
-        )
-      ];
+      ["✦", "✧", "⋆"][Math.floor(Math.random() * 3)];
 
-    sparkle.style.left = `${x}px`;
-    sparkle.style.top = `${y}px`;
-
-    sparkle.style.setProperty(
-      "--move-x",
-      `${(Math.random() - 0.5) * 45}px`
-    );
-
-    sparkle.style.setProperty(
-      "--move-y",
-      `${(Math.random() - 0.5) * 45}px`
-    );
-
-    sparkle.style.setProperty(
-      "--scale",
-      `${0.6 + Math.random() * 0.8}`
-    );
+    sparkle.style.cssText = `
+      position: fixed;
+      left: ${x}px;
+      top: ${y}px;
+      pointer-events: none;
+      z-index: 2147483646;
+      color: #9b8364;
+      font-size: ${10 + Math.random() * 8}px;
+      transform: translate(-50%, -50%);
+      opacity: 1;
+      transition: all .9s ease;
+    `;
 
     document.body.appendChild(sparkle);
+
+
+    requestAnimationFrame(() => {
+
+      sparkle.style.opacity = "0";
+
+      sparkle.style.transform =
+        `translate(
+          ${-50 + (Math.random() * 100)}px,
+          ${-50 + (Math.random() * 100)}px
+        ) scale(.3)`;
+
+    });
+
 
     setTimeout(() => {
       sparkle.remove();
@@ -604,61 +564,12 @@ setInterval(() => {
   }
 
 
-  /* =====================================
-     ✦ CLICK SPARKLE BURST
-  ===================================== */
-
-  document.addEventListener("click", (event) => {
-
-    const symbols = [
-      "✦",
-      "✧",
-      "⋆",
-      "✦",
-      "·"
-    ];
+  /* ✦ Click burst */
+  document.addEventListener("click", (e) => {
 
     for (let i = 0; i < 8; i++) {
 
-      const sparkle =
-        document.createElement("span");
-
-      sparkle.className = "ky-click-sparkle";
-
-      sparkle.textContent =
-        symbols[
-          Math.floor(
-            Math.random() * symbols.length
-          )
-        ];
-
-      sparkle.style.left =
-        `${event.clientX}px`;
-
-      sparkle.style.top =
-        `${event.clientY}px`;
-
-      const angle =
-        (Math.PI * 2 * i) / 8;
-
-      const distance =
-        25 + Math.random() * 25;
-
-      sparkle.style.setProperty(
-        "--x",
-        `${Math.cos(angle) * distance}px`
-      );
-
-      sparkle.style.setProperty(
-        "--y",
-        `${Math.sin(angle) * distance}px`
-      );
-
-      document.body.appendChild(sparkle);
-
-      setTimeout(() => {
-        sparkle.remove();
-      }, 700);
+      createSparkle(e.clientX, e.clientY);
 
     }
 
