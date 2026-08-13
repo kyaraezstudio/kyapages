@@ -468,28 +468,110 @@ document
 
   });
 /* =========================================
-   KYARAEZ ✦ FINAL CURSOR
+   KYARAEZ ✦ FINAL SPARKLE CURSOR
 ========================================= */
 
 if (window.matchMedia("(min-width: 901px)").matches) {
 
-  document.body.style.cursor = "none";
+  /* Hide default cursor */
+  const style = document.createElement("style");
 
-  /* ✦ Cursor */
+  style.textContent = `
+    html,
+    body,
+    body *,
+    a,
+    button,
+    input,
+    textarea,
+    select {
+      cursor: none !important;
+    }
+
+    .ky-final-cursor {
+      position: fixed;
+      pointer-events: none;
+      z-index: 2147483647;
+
+      font-size: 24px;
+      line-height: 1;
+
+      color: #8b7355;
+
+      transform:
+        translate(-50%, -50%)
+        scale(1);
+
+      transition:
+        transform .2s ease,
+        font-size .2s ease;
+
+      text-shadow:
+        0 0 6px rgba(139,115,85,.3),
+        0 0 14px rgba(139,115,85,.18);
+    }
+
+    .ky-final-cursor.hover {
+      font-size: 34px;
+
+      transform:
+        translate(-50%, -50%)
+        scale(1.05)
+        rotate(15deg);
+    }
+
+    .ky-final-sparkle {
+      position: fixed;
+      pointer-events: none;
+      z-index: 2147483646;
+
+      color: #9b8364;
+      font-size: 13px;
+
+      transform:
+        translate(-50%, -50%)
+        scale(.5);
+
+      animation:
+        kyFinalSparkle .9s ease-out forwards;
+    }
+
+    @keyframes kyFinalSparkle {
+
+      0% {
+        opacity: 0;
+      }
+
+      20% {
+        opacity: 1;
+      }
+
+      100% {
+        opacity: 0;
+
+        transform:
+          translate(
+            calc(-50% + var(--sx)),
+            calc(-50% + var(--sy))
+          )
+          scale(0);
+      }
+
+    }
+  `;
+
+  document.head.appendChild(style);
+
+
+  /* =====================================
+     ✦ CREATE CURSOR
+  ===================================== */
+
   const cursor = document.createElement("div");
 
-  cursor.innerHTML = "✦";
+  cursor.className = "ky-final-cursor";
 
-  cursor.style.cssText = `
-    position: fixed;
-    pointer-events: none;
-    z-index: 2147483647;
-    font-size: 23px;
-    line-height: 1;
-    color: #8b7355;
-    transform: translate(-50%, -50%);
-    display: block;
-  `;
+  cursor.textContent = "✦";
 
   document.body.appendChild(cursor);
 
@@ -498,78 +580,128 @@ if (window.matchMedia("(min-width: 901px)").matches) {
   let mouseY = window.innerHeight / 2;
 
 
-  /* Mouse */
-  document.addEventListener("mousemove", (e) => {
+  /* =====================================
+     🖱️ MOUSE MOVE
+  ===================================== */
 
-    mouseX = e.clientX;
-    mouseY = e.clientY;
+  document.addEventListener("mousemove", (event) => {
 
-    cursor.style.left = mouseX + "px";
-    cursor.style.top = mouseY + "px";
+    mouseX = event.clientX;
+    mouseY = event.clientY;
 
-    createSparkle(mouseX, mouseY);
+    cursor.style.left = `${mouseX}px`;
+    cursor.style.top = `${mouseY}px`;
+
+    /* Trail */
+    if (Math.random() < 0.3) {
+      createSparkle(mouseX, mouseY);
+    }
 
   });
 
 
-  /* Sparkle otomatis saat diam */
+  /* =====================================
+     ✨ SPARKLE SAAT MOUSE DIAM
+  ===================================== */
+
   setInterval(() => {
 
     createSparkle(mouseX, mouseY);
 
-  }, 400);
+  }, 450);
 
 
-  /* ✦ Sparkle */
-  function createSparkle(x, y) {
+  /* =====================================
+     👆 HOVER
+  ===================================== */
 
-    const sparkle = document.createElement("span");
+  const clickableElements = document.querySelectorAll(
+    "a, button, .service-card, .slider-arrow, .dot"
+  );
 
-    sparkle.textContent =
-      ["✦", "✧", "⋆"][Math.floor(Math.random() * 3)];
+  clickableElements.forEach((element) => {
 
-    sparkle.style.cssText = `
-      position: fixed;
-      left: ${x}px;
-      top: ${y}px;
-      pointer-events: none;
-      z-index: 2147483646;
-      color: #9b8364;
-      font-size: ${10 + Math.random() * 8}px;
-      transform: translate(-50%, -50%);
-      opacity: 1;
-      transition: all .9s ease;
-    `;
+    element.addEventListener("mouseenter", () => {
 
-    document.body.appendChild(sparkle);
-
-
-    requestAnimationFrame(() => {
-
-      sparkle.style.opacity = "0";
-
-      sparkle.style.transform =
-        `translate(
-          ${-50 + (Math.random() * 100)}px,
-          ${-50 + (Math.random() * 100)}px
-        ) scale(.3)`;
+      cursor.classList.add("hover");
 
     });
 
+    element.addEventListener("mouseleave", () => {
+
+      cursor.classList.remove("hover");
+
+    });
+
+  });
+
+
+  /* =====================================
+     ✦ CREATE SPARKLE
+  ===================================== */
+
+  function createSparkle(x, y) {
+
+    const sparkle =
+      document.createElement("span");
+
+    sparkle.className =
+      "ky-final-sparkle";
+
+    sparkle.textContent =
+      ["✦", "✧", "⋆"][
+
+        Math.floor(
+          Math.random() * 3
+        )
+
+      ];
+
+
+    sparkle.style.left =
+      `${x}px`;
+
+    sparkle.style.top =
+      `${y}px`;
+
+
+    sparkle.style.setProperty(
+      "--sx",
+      `${(Math.random() - .5) * 50}px`
+    );
+
+    sparkle.style.setProperty(
+      "--sy",
+      `${(Math.random() - .5) * 50}px`
+    );
+
+
+    document.body.appendChild(
+      sparkle
+    );
+
 
     setTimeout(() => {
+
       sparkle.remove();
+
     }, 900);
 
   }
 
 
-  /* ✦ Click burst */
-  document.addEventListener("click", (e) => {
+  /* =====================================
+     ✨ CLICK BURST
+  ===================================== */
+
+  document.addEventListener("click", (event) => {
 
     for (let i = 0; i < 8; i++) {
 
-      createSparkle(e.clientX, e.clientY);
+      createSparkle(
+        event.clientX,
+        event.clientY
+      );
 
     }
 
