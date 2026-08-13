@@ -468,17 +468,20 @@ document
 
   });
 /* =========================================
-   KYARAEZ BLOOM CURSOR
+   KYARAEZ ✦ SPARKLE CURSOR
 ========================================= */
 
 if (window.matchMedia("(min-width: 901px)").matches) {
 
-  const cursor = document.createElement("div");
+  // Hide default cursor
+  document.body.classList.add("ky-sparkle-cursor");
 
+  // Main sparkle cursor
+  const cursor = document.createElement("div");
   cursor.className = "ky-cursor";
+  cursor.innerHTML = "✦";
 
   document.body.appendChild(cursor);
-
 
   let mouseX = window.innerWidth / 2;
   let mouseY = window.innerHeight / 2;
@@ -486,47 +489,36 @@ if (window.matchMedia("(min-width: 901px)").matches) {
   let cursorX = mouseX;
   let cursorY = mouseY;
 
-
-  /* Smooth cursor movement */
+  /* =====================================
+     MOUSE MOVEMENT
+  ===================================== */
 
   document.addEventListener("mousemove", (event) => {
 
     mouseX = event.clientX;
     mouseY = event.clientY;
 
-    /* Random sparkle */
-
-    if (Math.random() < 0.18) {
-
-      createSparkle(
-        mouseX,
-        mouseY
-      );
-
+    // Sparkle trail
+    if (Math.random() < 0.22) {
+      createSparkle(mouseX, mouseY);
     }
 
   });
 
 
+  /* =====================================
+     SMOOTH CURSOR
+  ===================================== */
+
   function animateCursor() {
 
-    cursorX +=
-      (mouseX - cursorX) * 0.18;
+    cursorX += (mouseX - cursorX) * 0.20;
+    cursorY += (mouseY - cursorY) * 0.20;
 
-    cursorY +=
-      (mouseY - cursorY) * 0.18;
+    cursor.style.left = `${cursorX}px`;
+    cursor.style.top = `${cursorY}px`;
 
-
-    cursor.style.transform =
-      `translate(
-        ${cursorX}px,
-        ${cursorY}px
-      ) translate(-50%, -50%)`;
-
-
-    requestAnimationFrame(
-      animateCursor
-    );
+    requestAnimationFrame(animateCursor);
 
   }
 
@@ -542,47 +534,32 @@ if (window.matchMedia("(min-width: 901px)").matches) {
       "a, button, .service-card"
     );
 
-
   clickableElements.forEach((element) => {
 
-    element.addEventListener(
-      "mouseenter",
-      () => {
+    element.addEventListener("mouseenter", () => {
 
-        cursor.classList.add(
-          "hover"
-        );
+      cursor.classList.add("hover");
 
-      }
-    );
+    });
 
+    element.addEventListener("mouseleave", () => {
 
-    element.addEventListener(
-      "mouseleave",
-      () => {
+      cursor.classList.remove("hover");
 
-        cursor.classList.remove(
-          "hover"
-        );
-
-      }
-    );
+    });
 
   });
 
 
   /* =====================================
-     SPARKLE
+     ✦ SPARKLE TRAIL
   ===================================== */
 
   function createSparkle(x, y) {
 
-    const sparkle =
-      document.createElement("span");
+    const sparkle = document.createElement("span");
 
-    sparkle.className =
-      "ky-sparkle";
-
+    sparkle.className = "ky-sparkle";
 
     const symbols = [
       "✦",
@@ -591,83 +568,98 @@ if (window.matchMedia("(min-width: 901px)").matches) {
       "·"
     ];
 
-
     sparkle.textContent =
       symbols[
         Math.floor(
-          Math.random() *
-          symbols.length
+          Math.random() * symbols.length
         )
       ];
 
-
-    sparkle.style.left =
-      `${x}px`;
-
-    sparkle.style.top =
-      `${y}px`;
-
+    sparkle.style.left = `${x}px`;
+    sparkle.style.top = `${y}px`;
 
     sparkle.style.setProperty(
       "--move-x",
-      `${(Math.random() - 0.5) * 35}px`
+      `${(Math.random() - 0.5) * 45}px`
     );
-
 
     sparkle.style.setProperty(
       "--move-y",
-      `${(Math.random() - 0.5) * 35}px`
+      `${(Math.random() - 0.5) * 45}px`
     );
 
-
-    document.body.appendChild(
-      sparkle
+    sparkle.style.setProperty(
+      "--scale",
+      `${0.6 + Math.random() * 0.8}`
     );
 
+    document.body.appendChild(sparkle);
 
     setTimeout(() => {
-
       sparkle.remove();
-
-    }, 800);
+    }, 900);
 
   }
 
 
   /* =====================================
-     CLICK BLOOM
+     ✦ CLICK SPARKLE BURST
   ===================================== */
 
-  document.addEventListener(
-    "click",
-    (event) => {
+  document.addEventListener("click", (event) => {
 
-      const bloom =
+    const symbols = [
+      "✦",
+      "✧",
+      "⋆",
+      "✦",
+      "·"
+    ];
+
+    for (let i = 0; i < 8; i++) {
+
+      const sparkle =
         document.createElement("span");
 
-      bloom.className =
-        "ky-click";
+      sparkle.className = "ky-click-sparkle";
 
+      sparkle.textContent =
+        symbols[
+          Math.floor(
+            Math.random() * symbols.length
+          )
+        ];
 
-      bloom.style.left =
+      sparkle.style.left =
         `${event.clientX}px`;
 
-      bloom.style.top =
+      sparkle.style.top =
         `${event.clientY}px`;
 
+      const angle =
+        (Math.PI * 2 * i) / 8;
 
-      document.body.appendChild(
-        bloom
+      const distance =
+        25 + Math.random() * 25;
+
+      sparkle.style.setProperty(
+        "--x",
+        `${Math.cos(angle) * distance}px`
       );
 
+      sparkle.style.setProperty(
+        "--y",
+        `${Math.sin(angle) * distance}px`
+      );
+
+      document.body.appendChild(sparkle);
 
       setTimeout(() => {
-
-        bloom.remove();
-
-      }, 600);
+        sparkle.remove();
+      }, 700);
 
     }
-  );
+
+  });
 
 }
