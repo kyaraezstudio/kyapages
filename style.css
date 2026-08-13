@@ -1481,3 +1481,50 @@ footer {
   }
 
 }
+@media (min-width: 901px) {
+
+  /* ✦ Cursor utama */
+  .ky-cursor {
+    position: fixed;
+    z-index: 99999;
+    pointer-events: none;
+
+    width: auto !important;
+    height: auto !important;
+
+    border: none !important;
+    border-radius: 0 !important;
+    background: transparent !important;
+
+    font-size: 22px;
+    line-height: 1;
+
+    color: #8b7355;
+
+    transform: translate(-50%, -50%);
+
+    text-shadow:
+      0 0 5px rgba(139, 115, 85, 0.3),
+      0 0 12px rgba(139, 115, 85, 0.15);
+
+    transition:
+      transform 0.18s ease,
+      font-size 0.18s ease;
+  }
+
+  /* ✦ Saat hover */
+  .ky-cursor.hover {
+    width: auto !important;
+    height: auto !important;
+
+    border: none !important;
+    background: transparent !important;
+
+    font-size: 30px;
+
+    transform:
+      translate(-50%, -50%)
+      rotate(18deg);
+  }
+
+}
