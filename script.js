@@ -467,3 +467,207 @@ document
     });
 
   });
+/* =========================================
+   KYARAEZ BLOOM CURSOR
+========================================= */
+
+if (window.matchMedia("(min-width: 901px)").matches) {
+
+  const cursor = document.createElement("div");
+
+  cursor.className = "ky-cursor";
+
+  document.body.appendChild(cursor);
+
+
+  let mouseX = window.innerWidth / 2;
+  let mouseY = window.innerHeight / 2;
+
+  let cursorX = mouseX;
+  let cursorY = mouseY;
+
+
+  /* Smooth cursor movement */
+
+  document.addEventListener("mousemove", (event) => {
+
+    mouseX = event.clientX;
+    mouseY = event.clientY;
+
+    /* Random sparkle */
+
+    if (Math.random() < 0.18) {
+
+      createSparkle(
+        mouseX,
+        mouseY
+      );
+
+    }
+
+  });
+
+
+  function animateCursor() {
+
+    cursorX +=
+      (mouseX - cursorX) * 0.18;
+
+    cursorY +=
+      (mouseY - cursorY) * 0.18;
+
+
+    cursor.style.transform =
+      `translate(
+        ${cursorX}px,
+        ${cursorY}px
+      ) translate(-50%, -50%)`;
+
+
+    requestAnimationFrame(
+      animateCursor
+    );
+
+  }
+
+  animateCursor();
+
+
+  /* =====================================
+     HOVER EFFECT
+  ===================================== */
+
+  const clickableElements =
+    document.querySelectorAll(
+      "a, button, .service-card"
+    );
+
+
+  clickableElements.forEach((element) => {
+
+    element.addEventListener(
+      "mouseenter",
+      () => {
+
+        cursor.classList.add(
+          "hover"
+        );
+
+      }
+    );
+
+
+    element.addEventListener(
+      "mouseleave",
+      () => {
+
+        cursor.classList.remove(
+          "hover"
+        );
+
+      }
+    );
+
+  });
+
+
+  /* =====================================
+     SPARKLE
+  ===================================== */
+
+  function createSparkle(x, y) {
+
+    const sparkle =
+      document.createElement("span");
+
+    sparkle.className =
+      "ky-sparkle";
+
+
+    const symbols = [
+      "✦",
+      "✧",
+      "⋆",
+      "·"
+    ];
+
+
+    sparkle.textContent =
+      symbols[
+        Math.floor(
+          Math.random() *
+          symbols.length
+        )
+      ];
+
+
+    sparkle.style.left =
+      `${x}px`;
+
+    sparkle.style.top =
+      `${y}px`;
+
+
+    sparkle.style.setProperty(
+      "--move-x",
+      `${(Math.random() - 0.5) * 35}px`
+    );
+
+
+    sparkle.style.setProperty(
+      "--move-y",
+      `${(Math.random() - 0.5) * 35}px`
+    );
+
+
+    document.body.appendChild(
+      sparkle
+    );
+
+
+    setTimeout(() => {
+
+      sparkle.remove();
+
+    }, 800);
+
+  }
+
+
+  /* =====================================
+     CLICK BLOOM
+  ===================================== */
+
+  document.addEventListener(
+    "click",
+    (event) => {
+
+      const bloom =
+        document.createElement("span");
+
+      bloom.className =
+        "ky-click";
+
+
+      bloom.style.left =
+        `${event.clientX}px`;
+
+      bloom.style.top =
+        `${event.clientY}px`;
+
+
+      document.body.appendChild(
+        bloom
+      );
+
+
+      setTimeout(() => {
+
+        bloom.remove();
+
+      }, 600);
+
+    }
+  );
+
+}
