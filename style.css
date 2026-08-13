@@ -1571,3 +1571,41 @@ footer {
   }
 
 }
+/* FORCE REMOVE DEFAULT CURSOR */
+@media (min-width: 901px) {
+
+  html,
+  body,
+  body *,
+  a,
+  button,
+  input,
+  textarea,
+  select,
+  [role="button"] {
+    cursor: none !important;
+  }
+
+  .ky-cursor {
+    display: block !important;
+    position: fixed !important;
+
+    width: auto !important;
+    height: auto !important;
+
+    border: 0 !important;
+    border-radius: 0 !important;
+    background: none !important;
+
+    pointer-events: none !important;
+    z-index: 2147483647 !important;
+
+    font-size: 24px !important;
+    line-height: 1 !important;
+
+    color: #8b7355 !important;
+
+    transform: translate(-50%, -50%) !important;
+  }
+
+}
