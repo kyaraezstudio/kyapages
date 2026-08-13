@@ -495,15 +495,17 @@ if (window.matchMedia("(min-width: 901px)").matches) {
 
   document.addEventListener("mousemove", (event) => {
 
-    mouseX = event.clientX;
-    mouseY = event.clientY;
+  mouseX = event.clientX;
+  mouseY = event.clientY;
 
-    // Sparkle trail
-    if (Math.random() < 0.22) {
-      createSparkle(mouseX, mouseY);
-    }
+});
 
-  });
+
+setInterval(() => {
+
+  createSparkle(mouseX, mouseY);
+
+}, 350);
 
 
   /* =====================================
