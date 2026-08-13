@@ -1385,7 +1385,50 @@ footer {
   .ky-sparkle-cursor * {
     cursor: none !important;
   }
+@media (min-width: 901px) {
 
+  body,
+  body * {
+    cursor: none !important;
+  }
+
+  .ky-cursor {
+    position: fixed !important;
+    display: block !important;
+
+    width: 24px !important;
+    height: 24px !important;
+
+    border: none !important;
+    border-radius: 0 !important;
+    background: transparent !important;
+
+    color: #8b7355 !important;
+
+    font-size: 24px !important;
+    line-height: 1 !important;
+
+    pointer-events: none !important;
+    z-index: 999999 !important;
+
+    transform: translate(-50%, -50%) !important;
+
+    text-shadow:
+      0 0 6px rgba(139,115,85,.35),
+      0 0 14px rgba(139,115,85,.2) !important;
+  }
+
+  .ky-cursor.hover {
+    width: 30px !important;
+    height: 30px !important;
+
+    border: none !important;
+    background: transparent !important;
+
+    font-size: 30px !important;
+  }
+
+}
   
 
  
