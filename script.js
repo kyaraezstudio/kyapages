@@ -493,7 +493,7 @@ if (window.matchMedia("(min-width: 901px)").matches) {
       pointer-events: none;
       z-index: 2147483647;
 
-      font-size: 24px;
+      font-size: 27px;
       line-height: 1;
 
       color: #8b7355;
@@ -526,7 +526,7 @@ if (window.matchMedia("(min-width: 901px)").matches) {
       z-index: 2147483646;
 
       color: #9b8364;
-      font-size: 13px;
+      font-size: 18px;
 
       transform:
         translate(-50%, -50%)
@@ -667,12 +667,12 @@ if (window.matchMedia("(min-width: 901px)").matches) {
 
     sparkle.style.setProperty(
       "--sx",
-      `${(Math.random() - .5) * 50}px`
+      `${(Math.random() - .5) * 65}px`
     );
 
     sparkle.style.setProperty(
       "--sy",
-      `${(Math.random() - .5) * 50}px`
+      `${(Math.random() - .5) * 65}px`
     );
 
 
