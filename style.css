@@ -1287,3 +1287,133 @@ footer {
   object-fit: cover;
   object-position: center top;
 }
+/* =========================================
+   KYARAEZ CUTE BLOOM CURSOR
+========================================= */
+
+@media (min-width: 901px) {
+
+  body {
+    cursor: none;
+  }
+
+  a,
+  button,
+  .service-card,
+  .slider-arrow,
+  .dot {
+    cursor: none;
+  }
+
+  /* Main cursor */
+  .ky-cursor {
+    position: fixed;
+    top: 0;
+    left: 0;
+
+    width: 13px;
+    height: 13px;
+
+    border: 1.5px solid var(--green-dark);
+    background: rgba(142, 165, 141, 0.18);
+
+    border-radius: 50%;
+
+    pointer-events: none;
+    z-index: 9999;
+
+    transform: translate(-50%, -50%);
+    transition:
+      width 0.2s ease,
+      height 0.2s ease,
+      background 0.2s ease,
+      border-color 0.2s ease;
+  }
+
+  /* Cursor when hovering clickable elements */
+  .ky-cursor.hover {
+    width: 34px;
+    height: 34px;
+
+    background: rgba(118, 92, 73, 0.08);
+    border-color: var(--brown);
+  }
+
+  /* Little sparkle */
+  .ky-sparkle {
+    position: fixed;
+
+    pointer-events: none;
+    z-index: 9998;
+
+    color: var(--green-dark);
+
+    font-family: "Playfair Display", serif;
+    font-size: 13px;
+
+    transform: translate(-50%, -50%);
+
+    animation: kySparkle 0.8s ease-out forwards;
+  }
+
+  @keyframes kySparkle {
+
+    0% {
+      opacity: 0;
+      transform:
+        translate(-50%, -50%)
+        scale(0.4)
+        rotate(0deg);
+    }
+
+    30% {
+      opacity: 1;
+    }
+
+    100% {
+      opacity: 0;
+      transform:
+        translate(
+          calc(-50% + var(--move-x)),
+          calc(-50% + var(--move-y))
+        )
+        scale(1.15)
+        rotate(25deg);
+    }
+  }
+
+  /* Click bloom */
+  .ky-click {
+    position: fixed;
+
+    width: 12px;
+    height: 12px;
+
+    border: 1px solid var(--brown);
+
+    border-radius: 50%;
+
+    pointer-events: none;
+    z-index: 9997;
+
+    transform: translate(-50%, -50%);
+
+    animation: kyClick 0.55s ease-out forwards;
+  }
+
+  @keyframes kyClick {
+
+    0% {
+      opacity: 0.8;
+      width: 10px;
+      height: 10px;
+    }
+
+    100% {
+      opacity: 0;
+      width: 55px;
+      height: 55px;
+    }
+  }
+
+}
