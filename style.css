@@ -1287,11 +1287,9 @@ footer {
   object-fit: cover;
   object-position: center top;
 }
-/* =========================================
-   KYARAEZ CUTE BLOOM CURSOR
-========================================= */
 
-@media (min-width: 901px) {
+
+ {
 
   body {
     cursor: none;
@@ -1401,20 +1399,7 @@ footer {
     animation: kyClick 0.55s ease-out forwards;
   }
 
-  @keyframes kyClick {
-
-    0% {
-      opacity: 0.8;
-      width: 10px;
-      height: 10px;
-    }
-
-    100% {
-      opacity: 0;
-      width: 55px;
-      height: 55px;
-    }
-  }
+ 
 
 }
 /* =========================================
