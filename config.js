@@ -5,7 +5,7 @@
  */
 const KY_CONFIG = {
   // WAJIB diisi setelah deploy Apps Script
-  WEB_APP_URL: "https://script.google.com/macros/s/YOUR_DEPLOYMENT_ID/exec",
+  WEB_APP_URL: https://script.google.com/macros/s/AKfycbyAUAtsNq_QXW_YKpyMp7uQVx2y1pwPfAfPHbOd3jVDKwAVp1zBgjLQCKCn93W5cAIC/exec,
 
   // Nomor WhatsApp (tanpa +), untuk fallback checkout
   WHATSAPP_NUMBER: "6285286707303",
